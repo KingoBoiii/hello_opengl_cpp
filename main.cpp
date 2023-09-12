@@ -1,4 +1,5 @@
 #include <vk.h>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 int main() {
@@ -24,11 +25,19 @@ int main() {
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        print("Failed to initialize GLAD");
+        return -1;
+    }
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
+
+        /* Clears the screen buffer */
+        glClearColor(0.2f, 0.7f, 0.2f, 1.0f);
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
